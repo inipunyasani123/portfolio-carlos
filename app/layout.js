@@ -12,7 +12,7 @@ const sora = Sora({ subsets: ['latin'], variable: '--font-sora', weight: ['600',
 const __jsonld = {"@context":"https://schema.org","@type":"WebSite","name":"Carlos Mendoza — Product Designer & Developer","description":"Portfolio template for Carlos Mendoza, a fictional product designer and full-stack developer: dark case studies that link to six live demo sites (a property marketplace, booking tools, and landing pages), plus notes on prices, schedules, and availability.","inLanguage":"en"};
 
 export const metadata = {
-  metadataBase: new URL("https://portfolio-carlos-eosin.vercel.app"),
+  metadataBase: new URL("https://portfolio-carlos.pintuweb.id"),
   title: { default: "Carlos Mendoza — Product Designer & Developer", template: "%s — Carlos Mendoza" },
   description: "Portfolio template for Carlos Mendoza, a fictional product designer and full-stack developer: dark case studies that link to six live demo sites (a property marketplace, booking tools, and landing pages), plus notes on prices, schedules, and availability.",
   applicationName: "Carlos Mendoza",
@@ -20,11 +20,11 @@ export const metadata = {
   authors: [{ name: "Carlos Mendoza" }],
   creator: "Carlos Mendoza",
   publisher: "Carlos Mendoza",
-  alternates: { canonical: "https://portfolio-carlos-eosin.vercel.app" },
+  alternates: { canonical: "https://portfolio-carlos.pintuweb.id" },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://portfolio-carlos-eosin.vercel.app",
+    url: "https://portfolio-carlos.pintuweb.id",
     siteName: "Carlos Mendoza",
     title: "Carlos Mendoza — Product Designer & Developer",
     description: "Portfolio template for Carlos Mendoza, a fictional product designer and full-stack developer: dark case studies that link to six live demo sites (a property marketplace, booking tools, and landing pages), plus notes on prices, schedules, and availability.",

@@ -2,7 +2,7 @@
 
 Portfolio template for Carlos Mendoza, a fictional product designer and full-stack developer: dark case studies that link to six live demo sites (a property marketplace, booking tools, and landing pages), plus notes on prices, schedules, and availability.
 
-**Demo live:** https://portfolio-carlos-eosin.vercel.app
+**Demo live:** https://portfolio-carlos.pintuweb.id
 
 ![Tangkapan layar](public/og.jpg)
 
@@ -21,12 +21,12 @@ Persona fiktif Carlos, full-stack developer. Tampilan gelap bergaya dasbor denga
 
 | Studi kasus | Demo live |
 | --- | --- |
-| Propertia | https://properti-propertia.vercel.app |
-| Gelanggang Petang | https://reservasi-futsal.vercel.app |
-| Tanjung Lengkung | https://reservasi-hotel-kappa.vercel.app |
-| Bioskop Kelir | https://reservasi-bioskop.vercel.app |
-| Nimbus | https://landing-nimbus.vercel.app |
-| SkyWings | https://landing-skywings.vercel.app |
+| Propertia | https://properti-propertia.pintuweb.id |
+| Gelanggang Petang | https://reservasi-futsal.pintuweb.id |
+| Tanjung Lengkung | https://reservasi-hotel.pintuweb.id |
+| Bioskop Kelir | https://reservasi-bioskop.pintuweb.id |
+| Nimbus | https://landing-nimbus.pintuweb.id |
+| SkyWings | https://landing-skywings.pintuweb.id |
 
 ## Halaman
 
