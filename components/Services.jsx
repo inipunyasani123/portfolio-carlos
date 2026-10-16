@@ -2,19 +2,14 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { initAos } from '@/lib/aos';
 import { PenTool, Calculator, Laptop } from 'lucide-react';
 import { services } from '@/lib/data';
 
 const IKON = { PenTool, Calculator, Laptop };
 
 export default function Services() {
-  useEffect(() => {
-    const initAOS = async () => {
-      const AOS = (await import('aos')).default;
-      AOS.init({ duration: 800, once: true });
-    };
-    initAOS();
-  }, []);
+  useEffect(() => { initAos(); }, []);
 
   return (
     <section className="border-t border-gray-800 bg-gray-900 px-6 py-20 text-white md:px-12 md:py-24">

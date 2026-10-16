@@ -4,8 +4,9 @@ import { ArrowRight } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import Reveal from '@/components/ui/Reveal';
 import { profile, skills, experience, education } from '@/lib/data';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = { title: 'About' };
+export const metadata = pageMeta({ title: 'About', description: "About Carlos Mendoza, a fictional product designer who also ships the code: skills, tools, and eleven years of booking and pricing work.", path: '/about' });
 
 export default function AboutPage() {
   return (

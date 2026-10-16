@@ -2,28 +2,25 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { initAos } from '@/lib/aos';
 import Image from 'next/image';
 import Link from 'next/link';
 import { profile } from '@/lib/data';
 
 export default function Hero() {
-  useEffect(() => {
-    import('aos').then((aos) => {
-      aos.init({ duration: 800, once: true });
-    });
-  }, []);
+  useEffect(() => { initAos(); }, []);
 
   const [depan, ...belakang] = profile.name.split(' ');
 
   return (
     <section
       className="relative isolate flex min-h-screen items-center overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800 px-6 text-white md:px-12"
-      data-aos="fade-up"
     >
       <div className="dot-grid pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 py-20 md:grid-cols-2 md:gap-16">
       {/* Kolom Kiri - Teks */}
-      <div className="space-y-6 max-w-xl" data-aos="fade-right">
+      {/* Tanpa data-aos: judul & foto ini elemen LCP, jadi harus tampil sejak HTML pertama. */}
+      <div className="hero-rise space-y-6 max-w-xl">
         <h1 className="text-5xl md:text-6xl font-bold leading-tight tracking-tight">
           {depan} <br /> {belakang.join(' ')}<span className="text-yellow-400">.</span>
         </h1>
@@ -46,8 +43,7 @@ export default function Hero() {
 
       {/* Kolom Kanan - Gambar */}
       <div
-        className="relative w-full h-80 md:h-[440px] rounded-lg overflow-hidden shadow-2xl border-4 border-transparent group bg-gray-800"
-        data-aos="zoom-in"
+        className="hero-rise hero-rise-late relative w-full h-80 md:h-[440px] rounded-lg overflow-hidden shadow-2xl border-4 border-transparent group bg-gray-800"
       >
         <Image
           src={profile.avatar}
@@ -55,7 +51,7 @@ export default function Hero() {
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
-          priority
+          priority fetchPriority="high"
         />
       </div>
       </div>

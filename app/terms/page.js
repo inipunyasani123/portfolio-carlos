@@ -1,10 +1,7 @@
 import PageHeader from '@/components/PageHeader';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Terms',
-  description: 'Terms for using this portfolio template and the demo projects it links to.',
-  alternates: { canonical: '/terms' },
-};
+export const metadata = pageMeta({ title: 'Terms', description: "Terms for using this portfolio template: a fictional persona, demo projects with example prices, and CC0 photos credited in the README.", path: '/terms' });
 
 const sections = [
   { h: 'A fictional persona', p: 'Carlos Mendoza, the bio, and the work history on this site are fictional. They exist to show how a portfolio like this one can be put together.' },

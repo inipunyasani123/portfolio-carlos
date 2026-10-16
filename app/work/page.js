@@ -1,13 +1,16 @@
 'use client';
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { projects } from '@/lib/data';
 
 const CATS = ['All', ...new Set(projects.map((p) => p.category))];
+const MotionLink = motion.create(Link);
 
 export default function WorkPage() {
   const [cat, setCat] = useState('All');
+  const reduce = useReducedMotion();
   const list = useMemo(() => (cat === 'All' ? projects : projects.filter((p) => p.category === cat)), [cat]);
 
   return (
@@ -19,13 +22,14 @@ export default function WorkPage() {
           <p className="mt-4 max-w-2xl leading-relaxed text-gray-400">Six live products. Each card opens a case study with the rule behind it and a link to the live site.</p>
 
           {/* Filter */}
-          <div className="mt-8 flex flex-wrap gap-2">
+          <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects">
             {CATS.map((c) => (
               <button
                 key={c}
+                type="button"
                 onClick={() => setCat(c)}
                 aria-pressed={cat === c}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition ${cat === c ? 'bg-yellow-400 text-gray-900' : 'border border-gray-700 text-gray-300 hover:border-yellow-400/50 hover:text-white'}`}
+                className={`min-h-11 rounded-full px-4 py-2 text-sm font-medium transition ${cat === c ? 'bg-yellow-400 text-gray-900' : 'border border-gray-700 text-gray-300 hover:border-yellow-400/50 hover:text-white'}`}
               >
                 {c}
               </button>
@@ -35,30 +39,31 @@ export default function WorkPage() {
       </section>
 
       <section className="px-6 py-14 md:px-12 md:py-20">
-        <motion.div layout className="mx-auto grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2">
-          <AnimatePresence mode="popLayout">
+        <p className="sr-only" aria-live="polite">{list.length} projects shown</p>
+        <motion.div layout={!reduce} className="mx-auto grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2">
+          <AnimatePresence mode="popLayout" initial={false}>
             {list.map((p) => (
-              <motion.a
+              <MotionLink
                 key={p.slug}
                 href={`/work/${p.slug}`}
-                layout
-                initial={{ opacity: 0, scale: 0.96 }}
+                layout={!reduce}
+                initial={reduce ? false : { opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.3 }}
+                exit={reduce ? undefined : { opacity: 0, scale: 0.96 }}
+                transition={{ duration: reduce ? 0 : 0.3 }}
                 className="group block"
               >
                 <div className="relative mb-4 h-64 w-full overflow-hidden rounded-xl shadow-xl ring-1 ring-white/5 transition group-hover:ring-yellow-400/30">
                   <Image src={p.image} alt="" fill sizes="(max-width:640px) 100vw, 50vw" className="object-cover object-top transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                  <span className="absolute left-4 top-4 rounded-full bg-gray-900/80 px-3 py-1 text-xs font-semibold text-yellow-400 backdrop-blur">{p.category}</span>
+                  <span className="absolute left-4 top-4 rounded-full bg-gray-900 px-3 py-1 text-xs font-semibold text-yellow-400">{p.category}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold transition-colors group-hover:text-yellow-400">{p.title}</h3>
+                  <h2 className="text-xl font-bold transition-colors group-hover:text-yellow-400">{p.title}</h2>
                   <span className="font-mono text-xs text-gray-400">{p.year}</span>
                 </div>
                 <p className="mt-1 text-sm text-gray-400">{p.desc}</p>
-              </motion.a>
+              </MotionLink>
             ))}
           </AnimatePresence>
         </motion.div>

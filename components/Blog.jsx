@@ -2,18 +2,13 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { initAos } from '@/lib/aos';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { posts } from '@/lib/data';
 
 export default function Blog() {
-  useEffect(() => {
-    const initAOS = async () => {
-      const AOS = (await import('aos')).default;
-      AOS.init({ duration: 800, once: true });
-    };
-    initAOS();
-  }, []);
+  useEffect(() => { initAos(); }, []);
 
   return (
     <section className="border-t border-gray-800 bg-gray-900 px-6 py-20 text-white md:px-12 md:py-24">
@@ -47,7 +42,7 @@ export default function Blog() {
             </Link>
           ))}
         </div>
-        <Link href="/blog" className="mt-8 inline-block text-sm font-semibold text-yellow-400 hover:underline" data-aos="fade-up">
+        <Link href="/blog" className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-yellow-400 hover:underline" data-aos="fade-up">
           View all posts <span aria-hidden="true">↗</span>
         </Link>
       </div>

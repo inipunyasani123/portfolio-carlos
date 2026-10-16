@@ -1,11 +1,13 @@
 'use client';
-import { useState } from 'react';
-import { Mail, MapPin, Check } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Mail, MapPin, Check, ListChecks } from 'lucide-react';
 import { profile } from '@/lib/data';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
+  const doneRef = useRef(null);
+  useEffect(() => { if (sent) doneRef.current?.focus(); }, [sent]);
 
   const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value });
   const submit = (e) => {
@@ -15,7 +17,8 @@ export default function ContactPage() {
     setSent(true);
   };
 
-  const field = 'w-full rounded-xl border border-gray-700 bg-gray-800/60 px-4 py-3 text-sm text-white outline-none transition focus:border-yellow-400';
+  const field = 'w-full rounded-xl border border-gray-700 bg-gray-800/60 px-4 py-3 text-base text-white transition focus:border-yellow-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400';
+  const label = 'mb-1.5 block text-sm font-medium text-gray-300';
 
   return (
     <main>
@@ -36,10 +39,14 @@ export default function ContactPage() {
             <Info icon={Mail} label="Email" value={profile.email} href={`mailto:${profile.email}`} />
             <Info icon={MapPin} label="Location" value={profile.location} />
             <div className="rounded-2xl border border-yellow-400/30 bg-yellow-400/5 p-5">
-              <span className="flex items-center gap-2 text-sm font-semibold text-yellow-400">
-                <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-yellow-400" /> Available for new projects
-              </span>
-              <p className="mt-2 text-sm text-gray-400">Currently booking projects for the next quarter.</p>
+              <p className="flex items-center gap-2 text-sm font-semibold text-yellow-400">
+                <ListChecks size={18} aria-hidden="true" /> A useful first note
+              </p>
+              <ul className="mt-2 space-y-1 text-sm text-gray-400">
+                <li>What the product does, and for whom.</li>
+                <li>The rule at its core: a price, a schedule, a limit.</li>
+                <li>A rough date, if there is one.</li>
+              </ul>
             </div>
           </div>
 
@@ -48,18 +55,28 @@ export default function ContactPage() {
             {sent ? (
               <div className="rounded-2xl border border-gray-800 bg-gray-800/50 p-10 text-center">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-yellow-400 text-gray-900"><Check size={28} aria-hidden="true" /></div>
-                <h2 className="mt-4 text-2xl font-bold">Thanks for trying the form!</h2>
+                <h2 ref={doneRef} tabIndex={-1} className="mt-4 text-2xl font-bold outline-none">Thanks for trying the form!</h2>
                 <p className="mt-1 text-gray-400">This is a portfolio template, {form.name}, so your message wasn&apos;t actually sent. In a live version, it lands straight in the owner&apos;s inbox.</p>
-                <button onClick={() => { setSent(false); setForm({ name: '', email: '', message: '' }); }} className="mt-6 rounded-full border border-gray-700 px-6 py-2.5 text-sm font-semibold text-gray-200 transition hover:bg-gray-800">Back to the form</button>
+                <button type="button" onClick={() => { setSent(false); setForm({ name: '', email: '', message: '' }); }} className="mt-6 min-h-11 rounded-full border border-gray-700 px-6 py-2.5 text-sm font-semibold text-gray-200 transition hover:bg-gray-800">Back to the form</button>
               </div>
             ) : (
               <form onSubmit={submit} className="space-y-4 rounded-2xl border border-gray-800 bg-gray-800/40 p-6 md:p-8">
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <input name="name" value={form.name} onChange={handle} placeholder="Your name" required className={field} />
-                  <input type="email" name="email" value={form.email} onChange={handle} placeholder="Your email" required className={field} />
+                  <div>
+                    <label htmlFor="f-name" className={label}>Name</label>
+                    <input id="f-name" name="name" value={form.name} onChange={handle} autoComplete="name" required className={field} />
+                  </div>
+                  <div>
+                    <label htmlFor="f-email" className={label}>Email</label>
+                    <input id="f-email" type="email" name="email" value={form.email} onChange={handle} autoComplete="email" required className={field} />
+                  </div>
                 </div>
-                <textarea name="message" value={form.message} onChange={handle} placeholder="Tell me about your project…" rows={6} required className={`${field} resize-none`} />
-                <button type="submit" className="w-full rounded-xl bg-yellow-400 py-3.5 font-semibold text-gray-900 transition hover:bg-yellow-300">Send message</button>
+                <div>
+                  <label htmlFor="f-message" className={label}>About the project</label>
+                  <textarea id="f-message" name="message" value={form.message} onChange={handle} placeholder="What should it calculate, schedule, or limit?" rows={6} required className={`${field} resize-none placeholder-gray-500`} />
+                </div>
+                <button type="submit" className="min-h-12 w-full rounded-xl bg-yellow-400 py-3.5 font-semibold text-gray-900 transition hover:bg-yellow-300">Send message</button>
+                <p className="text-center text-xs text-gray-400">Demo form: nothing is sent or stored.</p>
               </form>
             )}
           </div>

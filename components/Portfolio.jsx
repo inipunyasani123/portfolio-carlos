@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { initAos } from '@/lib/aos';
 import Image from 'next/image';
 import Link from 'next/link';
 import { projects } from '@/lib/data';
@@ -10,13 +11,7 @@ import { projects } from '@/lib/data';
 const TINGGI = ['h-[280px] md:h-[360px]', 'h-[360px] md:h-[480px]', 'h-[240px] md:h-[320px]'];
 
 export default function Portfolio() {
-  useEffect(() => {
-    const initAOS = async () => {
-      const AOS = (await import('aos')).default;
-      AOS.init({ duration: 800, once: true });
-    };
-    initAOS();
-  }, []);
+  useEffect(() => { initAos(); }, []);
 
   return (
     <section className="border-t border-gray-800 bg-gray-900 px-6 py-20 text-white md:px-12 md:py-24">

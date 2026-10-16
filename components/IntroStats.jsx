@@ -2,21 +2,15 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { initAos } from '@/lib/aos';
 import { profile, stats } from '@/lib/data';
 
 export default function IntroStats() {
-  useEffect(() => {
-    const initializeAOS = async () => {
-      const AOS = (await import('aos')).default;
-      AOS.init({ duration: 800, once: true });
-    };
-
-    initializeAOS();
-  }, []);
+  useEffect(() => { initAos(); }, []);
 
   return (
     <section
-      className="bg-gray-900 text-white px-6 md:px-12 py-20 md:py-24 border-t border-gray-800"
+      className="overflow-x-clip bg-gray-900 text-white px-6 md:px-12 py-20 md:py-24 border-t border-gray-800"
       data-aos="fade-up"
     >
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">

@@ -1,10 +1,7 @@
 import PageHeader from '@/components/PageHeader';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Privacy',
-  description: 'What this portfolio template does and does not collect.',
-  alternates: { canonical: '/privacy' },
-};
+export const metadata = pageMeta({ title: 'Privacy', description: "What this portfolio template does and does not collect: no accounts, no analytics, and a contact form that sends nothing anywhere.", path: '/privacy' });
 
 const sections = [
   { h: 'This is a template', p: 'Carlos Mendoza is a fictional persona and this site is a portfolio template. There is no business behind it collecting data.' },

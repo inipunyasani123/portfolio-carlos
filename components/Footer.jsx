@@ -28,9 +28,9 @@ export default function Footer() {
           </div>
           <div>
             <p className="text-sm uppercase tracking-wide text-gray-400">Navigation</p>
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-2">
               {nav.map((l) => (
-                <li key={l.href}><Link href={l.href} className="text-sm text-gray-400 transition hover:text-yellow-400">{l.label}</Link></li>
+                <li key={l.href}><Link href={l.href} className="inline-block py-1.5 text-sm text-gray-400 transition hover:text-yellow-400">{l.label}</Link></li>
               ))}
             </ul>
           </div>
@@ -43,8 +43,8 @@ export default function Footer() {
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-gray-800 pt-6 text-sm text-gray-400 md:flex-row">
           <p>&copy; {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="transition hover:text-yellow-400">Privacy</Link>
-            <Link href="/terms" className="transition hover:text-yellow-400">Terms</Link>
+            <Link href="/privacy" className="inline-block py-1.5 transition hover:text-yellow-400">Privacy</Link>
+            <Link href="/terms" className="inline-block py-1.5 transition hover:text-yellow-400">Terms</Link>
           </div>
         </div>
       </div>
