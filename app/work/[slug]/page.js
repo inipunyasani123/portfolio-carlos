@@ -36,7 +36,7 @@ export default async function CaseStudy({ params }) {
       <section className="px-6 py-14 md:px-12 md:py-20">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.6fr_1fr]">
           <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-800 shadow-xl ring-1 ring-white/5">
-            <Image src={p.image} alt={`Screenshot of ${p.title}`} fill priority fetchPriority="high" sizes="(max-width:1024px) 100vw, 60vw" className="object-cover object-top" />
+            <Image src={p.image} alt={`Screens from the ${p.title} live demo`} fill priority fetchPriority="high" sizes="(max-width:1024px) 100vw, 60vw" className="object-cover object-top" />
           </div>
           <aside className="h-fit rounded-2xl border border-gray-800 bg-gray-800/40 p-6">
             <dl className="space-y-4 text-sm">
